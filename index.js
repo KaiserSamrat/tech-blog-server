@@ -33,9 +33,19 @@ app.get('/singleBlog/:id',(req,res)=>{
         res.send({ count: result.insertedCount });
     })
   })
+  app.delete('/deleteJob/:id', (req, res) => {
+    const id = req.params.id;
+    blogCollection.deleteOne({ _id: ObjectID(id) }, (err) => {
+        if (!err) {
+            res.send({ count: 1 })
+        }
+    })
+
+})
+
 });
 
 
 
-app.listen(port)
+app.listen(process.env.PORT || port)
   
